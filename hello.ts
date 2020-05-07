@@ -1,37 +1,12 @@
-type CommonConfig = {
-  // Notice: if `statePath` is optional and const `elements` has not provide `statePath`, there will be compilation error
-  statePath: string
+type User = {
+  aaa: string,
+  1: string
 }
 
-type FormElement = ({
-  type: 'checkbox',
-  config: {
-    checked: boolean
-  }
-} | {
-  type: 'input',
-  config: {
-    text: string
-  }
-}) & {
-  config: CommonConfig
+function testStringKeys(keys: Extract<keyof User, string>) {
 }
 
-const elements: FormElement[] = [
-  {
-    type: 'checkbox',
-    config: {
-      checked: false,
-      statePath: 'aa'
-    }
-  },
-  {
-    type: 'input',
-    config: {
-      text: 'hello',
-      statePath: 'bb'
-    }
-  },
-]
+testStringKeys('aaa')
 
-console.log(elements)
+// compilation error
+testStringKeys(1)
